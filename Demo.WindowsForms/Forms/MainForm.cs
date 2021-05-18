@@ -80,6 +80,7 @@ namespace Demo.WindowsForms
                 MainMap.Zoom = 9;
 
 
+
                 //MainMap.ScaleMode = ScaleModes.Fractional;
 
                 // map events
