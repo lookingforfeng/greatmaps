@@ -789,8 +789,6 @@ namespace GMap.NET
                             {
                                 if (UseMemoryCache)
                                 {
-
-
                                     MemoryStream ms = (MemoryStream)(ret.Data);
                                     byte[] buff = new byte[ms.Capacity];
                                     if (ms.CanRead)
@@ -802,7 +800,15 @@ namespace GMap.NET
 
                                 if (Mode != AccessMode.ServerOnly && !provider.BypassCache)
                                 {
-                                    EnqueueCacheTask(new CacheQueueItem(rtile, ret.Data.GetBuffer(), CacheUsage.Both));
+                                    MemoryStream ms = (MemoryStream)(ret.Data);
+                                    byte[] buff = new byte[ms.Capacity];
+                                    if (ms.CanRead)
+                                    {
+                                        ms.Read(buff, 0, ms.Capacity);
+                                    }
+                                    MemoryCache.AddTileToMemoryCache(rtile, buff);
+                                    //EnqueueCacheTask(new CacheQueueItem(rtile, ret.Data.GetBuffer(), CacheUsage.Both));
+                                    EnqueueCacheTask(new CacheQueueItem(rtile, buff, CacheUsage.Both));
                                 }
                             }
                         }

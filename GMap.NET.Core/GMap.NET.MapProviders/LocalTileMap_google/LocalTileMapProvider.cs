@@ -91,9 +91,6 @@
             //Byte[] image = new Byte[filelength]; //建立一个字节数组 
             //fs.Read(image, 0, filelength); //按字节流读取 
 
-
-
-
             PureImage ret = GMapProvider.TileImageProxy.FromStream(ms);
             if (ms.Length > 0)
             {
